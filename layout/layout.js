@@ -1,11 +1,31 @@
-import { Sidebar } from "components/sidebar"
 import Head from "next/head"
+import { Sidebar } from "components/sidebar"
+import Modal from "react-modal";
+import { useQuiosco } from "hooks/useQuiosco";
+import ReactModal from "react-modal";
+import { ModalProducto } from "components/modalProducto";
 
-export const Layout = ({children,}) => {
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+};
+
+Modal.setAppElement('#__next');
+
+export const Layout = ({children, pagina}) => {
+
+    const { modal, producto } = useQuiosco()
+    
   return (
     <>
         <Head>
-            <title>Café - </title>
+            <title>Café - {pagina}</title>
             <meta name="description" content="Quiosco - Cafetería " />
         </Head>
 
@@ -15,9 +35,24 @@ export const Layout = ({children,}) => {
             </aside>
 
             <main className="md:w-8/12 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll">
-                {children}
+                <div className="p-10">
+                    {children}
+                </div>
             </main>
         </div>
+
+        {
+            modal && (
+                <Modal
+                    isOpen={modal}
+                    style={customStyles}
+                >
+                    <ModalProducto 
+                        producto={producto}
+                    />
+                </Modal>
+            )
+        }
     </>
   )
 }
