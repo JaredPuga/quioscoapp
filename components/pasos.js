@@ -1,4 +1,3 @@
-import { useQuiosco } from "hooks/useQuiosco";
 import { useRouter } from "next/router";
 
 const pasos = [
@@ -10,13 +9,12 @@ const pasos = [
 export const Pasos = () => {
 
     const router = useRouter()
-    const { handleChangePaso, paso } = useQuiosco()
 
     const calcularProgreso = () => {
         let valor 
-        if (paso === 1) {
+        if (router.pathname === '/') {
             valor = 2
-        } else if (paso === 2) {
+        } else if (router.pathname === '/resumen') {
             valor = 50
         } else {
             valor = 100
@@ -34,7 +32,6 @@ export const Pasos = () => {
                     className='text-2xl font-bold'
                     onClick={() => {
                         router.push(paso.url)
-                        handleChangePaso(paso.paso)
                     }}
                 >
                     {paso.nombre}

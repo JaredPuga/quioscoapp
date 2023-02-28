@@ -33,7 +33,7 @@ export const Layout = ({children, pagina}) => {
         </Head>
 
         <div className="md:flex">
-            <aside className="md:w-4/12 xl:w-1/4 2xl:w-1/5">
+            <aside className="md:w-4/12 xl:w-1/4 2xl:w-1/5 border-r-4 border-gray-900">
                 <Sidebar />
             </aside>
 
